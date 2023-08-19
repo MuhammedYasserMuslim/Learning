@@ -1,0 +1,176 @@
+Ioc :-
+'E:\Spring\Spring-Core\Spring-Core\src\main\java\com\spring\ioc'
+
+public interface Sport{
+
+      public void call();
+}
+
+public class Football implements Sport{
+    @Override
+    public void call() {
+        System.out.println("I am Football");
+    }
+
+public class Basketball implements Sport{
+    @Override
+    public void call() {
+        System.out.println("I am Basketball");
+    }
+
+
+when you have to classes  implements from same Interface and shared in one method
+and you call the class you should chang name of class in calling
+
+
+public class Main {
+    public static void main(String[] args) {
+	Sport sport = new Foorball();
+	sport.call();    //output is I am Football
+	Sport sport1 = new Basketball();
+	sport1.call();   //output is I am Basketball
+
+}
+
+
+but now we do bean from class by adding annotations in class 
+
+public interface Sport{
+
+      public void call();
+}
+
+@Component
+public class Football implements Sport{
+    @Override
+    public void call() {
+        System.out.println("I am Football");
+
+    @PostConstruct
+    public void init(){
+             System.out.println("init Football");  //called init method when you call bean it work 
+    	}
+    @PreDestroy
+    public void Destroy(){
+        System.out.println("Destroy Football");  //called destroy method when you close the bean
+    }
+ }
+
+@Component
+public class Basketball implements Sport{
+    @Override
+    public void call() {
+        System.out.println("I am Basketball");
+    }
+	
+
+
+when you call you call by bean no by class
+
+First:-You make Conficration called container
+
+@Configuration
+@ComponentScan("com.spring")
+public class Config {
+
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+ 	AnnotationConfigApplicationContext config =
+               new AnnotationConfigApplicationContext(Config.class);
+        Sport sport =config.getBean("basketball",Sport.class);
+        sport.call(); //output is I am Basketball
+
+	Sport sport1 =config.getBean("football",Sport.class);
+        sport1.call(); //output is I am Football    and init method will called
+
+	config.close(); // and destroy method will called
+	
+}
+
+Dependancy injection:-
+'E:\Spring\Spring-Core\Spring-Core\src\main\java\com\spring'
+
+when you have class called Person implememt from Interface called PersonInterface
+
+public interface PersonInterface {
+    public void pim();
+
+    public void call();
+}
+@Component
+public class Person  implement PersonInterface{
+
+     @Override
+    public void pim() {
+        System.out.println("I am Person");
+    }
+
+    @Override
+    public void call() {
+    }
+
+}
+ and class called User implememt from Interface called UserInterface
+
+@Component
+public class User implements UserInterface{
+    @Override
+    public void uim() {
+        System.out.println("I am User one");
+    }
+}
+and another class implement from same interface UserInterface called User2
+
+@Component
+public class User2 implements UserInterface{
+    @Override
+    public void uim() {
+        System.out.println("I am User Two");
+    }
+}
+
+you can inject UserInterface in Peron and but annotation called @Autowired and call funiction uim() from UserIntrface
+
+public class Person  implement PersonInterface{
+
+     @Autowired
+     private Userinterface userinterface;
+
+     @Override
+    public void pim() {
+        System.out.println("I am Person");
+    }
+
+    @Override
+    public void call() {
+	this.userunterface.uim();
+    }
+
+}
+
+but we will have a problem which method will called uim in User or in User2
+
+we put annotation @Qualifier and chosse which one   like that 
+@Component
+public class Person implements PersonInterface{
+
+    @Qualifier("user2")
+    @Autowired
+    private UserInterface userInterface;
+
+
+    @Override
+    public void pim() {
+        System.out.println("I am Person");
+    }
+
+    @Override
+    public void call() {
+        this.userInterface.uim();
+    }
+}
+her he will called method in user2 
+

@@ -1,0 +1,54 @@
+Spring mvc :Model View Controller
+
+'E:\Spring\Spring-MVC'
+
+HttpServletRequest  لو عايز تجيب براميتر من فورم بتستخدم 
+
+        @RequestMapping("/log")
+	public String getInf(HttpServletRequest request) {
+		                       // input في  name بتكون ال //<input name="fname" 
+		String fname=request.getParameter("fname");
+		String lname=request.getParameter("lname");
+		
+		System.out.println(fname + lname);   // هنا هيطبع الاسماء الي في الفورم
+		
+		return "info";
+	}
+
+
+ model.addAttribute عشان تخزن قيمة وبعدين تبعتها لملف تاني عن طريق Model  بتاخد اوبجكت من 
+
+	@RequestMapping("/log")
+	public String getInf(HttpServletRequest request , Model model) {
+		
+		String fname=request.getParameter("fname");
+		String lname=request.getParameter("lname");
+		
+		System.out.println(fname + lname);
+		
+		String newFname = "Muhammed"; //هنا انا خزنت اسمي قي متغيرر وهبعته علي الصفحة 
+		String newLname = "Yasser";
+		
+		model.addAttribute("nfname",newFname);  // عملت اضافة للاسم واديته كود اقدر استدعيه بيخ في الملف  
+		model.addAttribute("nlname",newLname);
+		
+		
+		
+		return "info";
+	}
+
+
+  ${gالكود}هستدعي البراميتر في الملف عن طريق      
+<h1>${nfname}</h1>      
+  
+	@RequestMapping("/log")
+	public String getInf(@RequestParam("fname") String newFname  ,@RequestParam("lname") String newLname  , Model model) {
+			
+		model.addAttribute("nfname",newFname);
+		model.addAttribute("nlname",newLname);
+		
+		
+		
+		return "info";
+	}
+//طريقة تامية زي الدالة الي فوق

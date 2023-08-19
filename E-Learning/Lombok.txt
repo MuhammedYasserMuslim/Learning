@@ -1,0 +1,54 @@
+Lombok is a dependancy help you in class to make setter and getter and constaractor and some features.
+'E:\Spring\Lombok'
+
+
+@Setter & @Getter == @Data
+to make setter and getter in class.
+
+ 
+@AllArgsConstructor 
+to make All argument Constractor.
+
+@NoArgsConstructor
+to make No Argument Constractor.
+
+@ToString
+to make toString Method.
+
+@EqualsAndHashCode
+to make equal and hashcode Method.
+
+@Builder
+help you to set Argument
+ Syntax "Class_name object = Class_name.builder().parameter(value).parameter(value).parameter(value).build();"
+ Example "Person person1 = Person.builder().id(2).name("Ali").age(25).gender(Gender.Male).build();"
+
+@Slf4j
+=='public static final Logger log = LoggerFactory.getLogger(Class_name.class);'
+take object From Class Logger
+
+@NonNull
+object can't be null : Run RunPointerException
+Example
+'Person person2 = null;
+        person2.toString();'
+
+
+
+import lombok.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+@EqualsAndHashCode
+@NonNull
+public class Person {
+    private int id;
+    private String name;
+    private int age;
+    private Gender gender;
+
+
+}

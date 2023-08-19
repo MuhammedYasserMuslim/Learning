@@ -1,0 +1,11 @@
+@Bean 
+'E:\Spring\Spring-Core\Spring-Core\src\main\java\com\spring\bean'
+
+@Configuration
+public class ConfigBean {
+
+    @Bean
+    public UserInterface myUser(){          //you take bean from UserInterface
+        UserInterface user = new User();
+        return user;
+    }

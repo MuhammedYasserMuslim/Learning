@@ -1,0 +1,139 @@
+Spring data
+
+save object
+public static void main(String[] args) {
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Person.class).buildSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+
+
+            Person person = new Person("Menna",24,"6th october");
+            session.save(person);
+
+
+
+
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+
+    }
+
+
+
+get from database;
+
+public static void main(String[] args) {
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Person.class).buildSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+
+
+            Person person = session.get(Person.class, 2L);
+            System.out.println(person.toString());
+
+
+
+
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+
+    }
+
+
+update;
+
+ public static void main(String[] args) {
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Person.class).buildSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            
+
+            Person person = session.get(Person.class, 2L);
+            person.setAddress("Kafr ElEshara");             //ده الي بيتغيير والباقي ثابت
+            session.update(person);
+            System.out.println(person.toString());
+            
+            
+            
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            session.close();
+        }
+
+    }
+
+
+
+
+
+Query:-
+
+show all in database using query
+	{
+	    List<Person> persons = session.createQuery("from Person").list();
+
+            for (int i = 0; i <persons.size() ; i++) {
+                System.out.println(persons.get(i).toString());
+
+            }
+
+show one from database
+	{
+	    List<Person> person = session.createQuery("from Person p where p.id = 1").list();
+            System.out.println( person.toString());
+		
+              }
+update using query
+	{
+	 session.createQuery("update Person  set fullName ='sila' where id = 6").executeUpdate();
+	}
+
+delete using query
+	{
+	session.createQuery("delete from Person   where id = 7").executeUpdate();
+	}
+
+select max id
+{ Query query = session.createQuery("select MAX (id) from Person");
+            System.out.println(query.list().toString());}
+
+
+
+
+
+
+
+
+
+
+Criteria:-
+show persons from 0 to 3
+{
+
+            Criteria criteria =session.createCriteria(Person.class) ;
+            criteria.setFirstResult(0);
+            criteria.setMaxResults(3);
+
+            List<Person> persons=criteria.list();
+}
+

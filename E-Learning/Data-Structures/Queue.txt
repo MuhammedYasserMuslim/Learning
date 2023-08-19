@@ -1,0 +1,17 @@
+Queue is  a linear data structure that is open at both ends and the operations are performed in First In First Out (FIFO) order.
+
+
+Queue<String> queue = new PriorityQueue<String>();
+        queue.add("Ali");
+        queue.add("Basel");
+        queue.add("Khalid");
+        queue.add("Muhammed");
+        queue.add("Yasser");
+        System.out.println(queue);  //[Ali, Basel, Khalid, Muhammed, Yasser]
+        System.out.println(queue.peek()); //Ali
+        queue.poll(); //delete Ali
+        System.out.println(queue); //[Basel, Muhammed, Khalid, Yasser]
+
+
+
+peek   الي عليه الدور يخرج

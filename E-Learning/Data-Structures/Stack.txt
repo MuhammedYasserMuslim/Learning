@@ -1,0 +1,18 @@
+Stack is a linear data structure that follows the principle of Last In First Out (LIFO) Last In First Out
+
+
+public class Main {
+    public static void main(String[] args) {
+
+       // Stack<String>stack=new Stack<String>(); //this line equal 
+        Stack stack = new Stack();                //this line
+        stack.push("Ali"); //to add 
+        stack.push("Muhammed");
+        stack.push("Salah");
+        stack.push("Yasser");
+        stack.push("Hassan");
+        System.out.println(stack);
+        stack.pop(); //to delete
+        System.out.println(stack.peek()); // to show top element
+
+    }
