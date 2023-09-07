@@ -1,0 +1,11 @@
+Main:-
+
+@SpringBootApplication == @ComponentScan
+                          @Configuration
+                          @EnableAutoConfiguration
+
+
+SpringApplication.run(Application.class, args);:-
+	create apllicationcontext
+	register any bean in container
+	have embede server

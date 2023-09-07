@@ -1,0 +1,8 @@
+                MySql                                                      mongodb
+
+           create database                                               use database
+           show databases                                                  show dbs
+  create table table_name                                                  db.collection
+ INSERT INTO table_name VALUES (value1, value2, value3, ...);      db.collection.insert(json)
+     SELECT * FROM TABLE_NAME                                         db.collection.find()
+     drop database database_name                                        db.dropDatabase

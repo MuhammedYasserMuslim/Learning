@@ -39,3 +39,12 @@ public class MainApp {
     }
 }
 out put  (User{id=1, name='Muhammed', age=22, address=[zagazig, Cairo]})
+
+--------------------------------------------------------
+ @Query(value = "select pla from Player pla where pla.id = :id")
+    public List<Player> findNameAndPositionJPQL(Long id);
+
+
+
+    @Query(value = " select * from player",nativeQuery = true)
+    public List<Player> findNameAndPositionSQL();
